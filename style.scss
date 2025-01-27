@@ -1,3 +1,47 @@
 body {
     background-color: aquamarine;
 }
+
+h1 {
+    text-align: center;
+    padding-top: 10%;
+    font-size: 30px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+
+    #search-input {
+        width: 80vw;
+        max-width: 500px;
+        height: 50px;
+        border: none;
+        border-radius: 30px;
+        padding-left: 25px;
+        box-shadow: 1px 1px 4px rgb(121 109 109 / 70%);
+        font-size: 16px;
+        font-weight: bold;
+        outline: none;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    #results {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    
+        li {
+            list-style: none;
+            font-size: 18px;
+        }
+    }
+
+}
+
+
+
