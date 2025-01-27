@@ -21,7 +21,7 @@ const fetchComments = async () => {
 
     try {
         console.log('Fetching fresh data');
-        const response = await axios.default.get('https://jsonplaceholder.typicode.com/comments?postId=3');
+        const response = await axios.get('https://jsonplaceholder.typicode.com/comments?postId=3');
         cache = {
             data: response.data,
             expiry: currentTime + CACHE_DURATION,
@@ -34,13 +34,13 @@ const fetchComments = async () => {
 
 app.get('/comments', async (req: express.Request, res: express.Response): Promise<void> => {
     try {
-        const query = req.query.q as string | undefined;
+        const name = req.query.q as string | undefined;
 
         const comments = await fetchComments();
 
-        if (query) {
+        if (name) {
             const filteredComments = comments.filter((comment: any) =>
-                comment.body.toLowerCase().includes(query.toLowerCase())
+                comment.body.toLowerCase().includes(name.toLowerCase())
             );
             res.json(filteredComments);
             return;

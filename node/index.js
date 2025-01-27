@@ -75,22 +75,23 @@ var fetchComments = function () { return __awaiter(void 0, void 0, void 0, funct
     });
 }); };
 app.get('/comments', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var query_1, comments, filteredComments, error_2;
+    var name_1, comments, filteredComments, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                query_1 = req.query.q;
+                name_1 = req.query.q;
                 return [4 /*yield*/, fetchComments()];
             case 1:
                 comments = _a.sent();
-                if (query_1) {
+                if (name_1) {
                     filteredComments = comments.filter(function (comment) {
-                        return comment.body.toLowerCase().includes(query_1.toLowerCase());
+                        return comment.body.toLowerCase().includes(name_1.toLowerCase());
                     });
                     res.json(filteredComments);
                     return [2 /*return*/];
                 }
+                res.json(comments);
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _a.sent();
@@ -101,6 +102,10 @@ app.get('/comments', function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); });
-app.listen(3001, function () {
-    console.log('Server is running on port 3001');
-});
+// Only start server if the file is run directly, not imported in tests
+if (require.main === module) {
+    app.listen(3001, function () {
+        console.log('Server is running on port 3001');
+    });
+}
+exports.default = app; // Exporting the app for testing
